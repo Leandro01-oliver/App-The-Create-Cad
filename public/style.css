@@ -1,0 +1,12 @@
+.btn-drop{
+    display: none!important;
+}
+
+@media screen and (max-width: 991.2px) {
+ .btn-menu:nth-child(1){
+   margin-bottom: 1rem;
+ }
+    .btn-drop{
+        display: block!important;
+    }
+}

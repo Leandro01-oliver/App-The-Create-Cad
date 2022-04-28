@@ -38,7 +38,16 @@ function Header() {
         <Box display={{ sm: 'none', lg: 'flex' }}>
           <AvatarUser />
         </Box>
-        <Box position={'absolute'} top={'70px'} bg={'azure'} display={showMenu ? { sm: 'block', lg: 'none' } : 'none'} w={'100%'} left={'0'} flexDirection={'column'} p={{ sm: '1rem', lg: '0' }}>
+        <Box 
+        position={'absolute'} 
+        top={'70px'} 
+        bg={'#fff'} 
+        display={showMenu ? { sm: 'block', lg: 'none' } : 'none'} 
+        w={'100%'} 
+        left={'0'} 
+        flexDirection={'column'} p={{ sm: '1rem', lg: '0' }} 
+        zIndex={'1000'}
+        >
           <AvatarUser />
           <Menu />
         </Box>

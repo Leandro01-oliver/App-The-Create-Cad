@@ -1,16 +1,23 @@
 import { db } from "../../../../../config/fireBaseConnecting";
-import { collection, deleteDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 
-const colectionRef = collection(db, "cards");
 
 const handlerDeliteCard = async (id) => {
- await deleteDoc(colectionRef,"cards",id)
- .then(()=>{
-     console.log("Sucesso na deleção do card")
- })
- .catch(()=>{
-     console.log("Não foi possível deletar card")
- });
+    if (deleteDoc) {
+        if (title != null && description != null) {
+             await deleteDoc(doc(db, "cards",id))
+             alert("Sucesso na exclusão")
+             location.reload();
+         }else if(title != null){
+             alert("Preencha o campo de title");
+         }else if(description != null){
+             alert("Preencha o campo de description");
+         }else{
+             alert("preencha todos os dois campos ")
+         }
+     } else {
+         console.log("Não foi possível exclusão")
+     }
 }
 
 export {handlerDeliteCard}

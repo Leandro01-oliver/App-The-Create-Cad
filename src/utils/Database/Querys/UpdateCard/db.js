@@ -1,16 +1,28 @@
 import { db } from "../../../../../config/fireBaseConnecting";
-import { collection, updateDoc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 
-const colectionRef = collection(db, "cards");
 
-const handlerUpdateCard = async (id) => {
- await updateDoc(colectionRef,"cards",id)
- .then(()=>{
-     console.log("Sucesso na atualização do card")
- })
- .catch(()=>{
-     console.log("Não foi possível atualizar card")
- });
+const handlerUpdateCard = async (id, title, description) => {
+    if (updateDoc) {
+        if (title != null && description != null) {
+            await updateDoc(doc(db, "cards", id, {
+                Title: title,
+                Description: description
+            }))
+            alert("Sucesso na Editação")
+            location.reload();
+        }else if(title != null){
+            alert("Preencha o campo de title");
+        }else if(description != null){
+            alert("Preencha o campo de description");
+        }else{
+            alert("preencha todos os dois campos ")
+        }
+    } else {
+        console.log("Não foi possível editar")
+    }
+
+
 }
 
-export {handlerUpdateCard}
+export { handlerUpdateCard }

@@ -31,7 +31,7 @@ function AvatarUser() {
           if(u != null){
             setUser(u);
             if(u.displayName.valueOf().length > 10){
-            setName(u.displayName.replace(u.displayName.substring(7,100),""));
+            setName(u.displayName.replace(u.displayName.substring(7,100),"..."));
             }
             setImage(u.photoURL)
           }else{
@@ -59,12 +59,13 @@ function AvatarUser() {
    right={'1rem'}
    bg={'#ccc'}
    p={'.5rem'}
+   zIndex={'1000'}
    borderBottomEndRadius={'10px'}
    borderBottomStartRadius={'10px'}
    display={showMenu ? 'block' : 'none'}
    mb={{sm:'1rem', lg:'0'}}
   >
-              <Text display={user? 'flex' : 'none' }> Nick Name<br/>{userName}</Text>
+              <Flex justify={'center'}><Text display={user? 'flex' : 'none' } > {userName}</Text></Flex>
               <Box my={'.5rem'} display={user ? 'flex' : 'none'} bg={'blue'} w={'100%'} h={'2px'}>
               </Box>
         <Button

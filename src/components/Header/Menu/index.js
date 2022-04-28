@@ -14,13 +14,6 @@ function Menu() {
             id: 1,
             name: "Home",
             link: "/",
-            icon: ""
-        },
-        {
-            id: 2,
-            name: "Portifólio",
-            link: "/portifolio",
-            icon: ""
         }
     ];
 

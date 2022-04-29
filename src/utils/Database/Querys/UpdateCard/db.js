@@ -3,14 +3,17 @@ import { updateDoc, doc } from "firebase/firestore";
 
 
 const handlerUpdateCard = async (id, title, description) => {
+    const refCollection = doc(db, 'cards', id);
     if (updateDoc) {
         if (title != null && description != null) {
-            await updateDoc(doc(db, "cards", id, {
+            await updateDoc(refCollection,{
                 Title: title,
                 Description: description
-            }))
+            })
             alert("Sucesso na Editação")
-            location.reload();
+            setTimeout(()=>{
+                window.location = "/Dropdow-Rota/MeusCards";
+            },3000)
         }else if(title != null){
             alert("Preencha o campo de title");
         }else if(description != null){

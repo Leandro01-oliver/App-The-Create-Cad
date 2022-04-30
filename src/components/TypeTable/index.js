@@ -132,45 +132,83 @@ function TypeTable() {
             </TableContainer>
 
             <Flex
+                display={btbDeliteShow ? 'block' : 'none'}
                 w={'100%'}
                 minH={'100vh'}
-                bg={'rbga(0,0,0,.5)'}
+                backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
                 left={'0'}
-                display={btbDeliteShow ? 'block' : 'none'}
+                px={'1rem'}
+                py={'20rem'}
             >
+                <Flex 
+                w={'100%'}
+                minH={'calc(50vh - 20rem)'}
+                maxW={'900px'}
+                mx={'auto'}
+                bg={'#fff'}
+                justify={'center'}
+                align={'center'}
+                boxShadow={'0 0 10px 0 rgba(0,0,0,.5)'}
+                p={'1rem'}
+                borderRadius={'20px'}
+                direction={'column'}
+                >
+                    <Text>
+                        Você tem certeza que deseja excluir o card?
+                    </Text>
+                    <br/>
                 <Button
+                w={'100%'}
                     onClick={()=> handlerDeliteCard(idCard)}
                 >
                     Confirmar
                 </Button>
+                <br/>
                 <Button
+                 w={'100%'}
                     onClick={handlerDeliteShow}
                 >
                     Cancelar
                 </Button>
+                </Flex>
             </Flex>
 
             <Flex
                 w={'100%'}
                 minH={'100vh'}
-                bg={'rbga(0,0,0,.5)'}
+                backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
                 left={'0'}
                 display={btbUpdateShow ? 'block' : 'none'}
+                px={'1rem'}
+                py={'20rem'}
             >
-                <form onSubmit={
+                <Flex 
+                w={'100%'}
+                minH={'calc(50vh - 20rem)'}
+                maxW={'900px'}
+                mx={'auto'}
+                bg={'#fff'}
+                justify={'center'}
+                align={'center'}
+                boxShadow={'0 0 10px 0 rgba(0,0,0,.5)'}
+                p={'1rem'}
+                borderRadius={'20px'}
+                >
+ <form onSubmit={
                                 (e)=>  {
                                             e.preventDefault();
                                             handlerUpdateCard(idCard,title,description);
                                         }
                                }
+                               style={{width:'100%'}}
                 >
-                    <Box>
+                    <Box >
                         <Text>{idCard}</Text>
-                        <FormLabel htmlFor='title'>
+                        <FormLabel htmlFor='title' mt={'1rem'}>
                             Title
                         </FormLabel>
                         <Input id="title" onChange={(e) => { setTitle(e.target.value) }} />
@@ -185,16 +223,20 @@ function TypeTable() {
 
                     <Button
                         type='submit'
+                        w={'100%'}
                     >
                         Confirmar
                     </Button>
+                    <br/>
                     <Button
+                    mt={'1rem'}
                         onClick={handlerUpdateShow}
+                        w={'100%'}
                     >
                         Cancelar
                     </Button>
                 </form>
-
+                </Flex>
             </Flex>
         </>
     )

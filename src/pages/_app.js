@@ -6,12 +6,12 @@ import "../../public/style.css"
 function MyApp({ Component, pageProps }) {
   return (
     <>
-    <ChakraProvider>
-            <Header/>
-      <Component {...pageProps} />
-    <Footer/>
-    </ChakraProvider>
-          </>
+      <ChakraProvider>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </ChakraProvider>
+    </>
   )
 }
 

@@ -55,8 +55,8 @@ function Footer() {
               <Text>
                 Parcerias :
               </Text>
-              <SimpleGrid columns={{sm:1,md:2,lg:3}} spacing={10} mt={'1rem'}>
-                <Box>
+              <Flex mt={'1rem'} w={'100%'} display={{sm:'block',md:'flex',lg:'flex'}} justify={{sm:'center',lg:'start'}}>
+                <Box mr={{sm:'0',md:'1rem',lg:'1rem'}} mb={{sm:'1rem',md:'1rem',lg:'0'}}>
                   <Image
                     src={Logo}
                     width={'50px'}
@@ -72,7 +72,7 @@ function Footer() {
                     style={{borderRadius:'50%'}}
                   />
                 </Box>
-              </SimpleGrid>
+              </Flex>
             </Box>
           </Box>
         </SimpleGrid>

@@ -9,6 +9,8 @@ function CriarCard() {
 
   const [dado, setDado] = useState([]);
 
+  const [img, setImg] = useState("");
+
   const [title, setTitle] = useState("");
 
   const [description, setDescription] = useState("");
@@ -19,12 +21,13 @@ function CriarCard() {
   const handlerSubmitCreateCard =  (e) => {
     e.preventDefault();
 
+    if (img != "" && title != "" && description != "") {
+
     const file = e.target[0].files[0];
 
     const storageRef = ref(storage, `/files/${file.name}`);
 
     const uploadTask =  uploadBytesResumable(storageRef, file);
-
 
     uploadTask.on('state_changed',
       (snapshot) => {
@@ -42,19 +45,23 @@ function CriarCard() {
 
         getDownloadURL(uploadTask.snapshot.ref)
           .then(async(url)=>{
-            if (title != "" && description != "") {
               await handlerCreateCard(url, title, description)
-            } else if (title == "") {
-              alert("preencha o titulo")
-            } else if (description == "") {
-              alert("preencha a descrição")
-        
-            } else {
-              alert("preencha os campos")
-            }
           });
       }
     );
+
+    }else if (img == "") {
+      alert("Faça o upload da imagem")
+    } else if (title == "" && description == "") {
+      alert("Preencha os campos de titulo e descrição")
+    }else if (title == "") {
+      alert("Preencha o titulo")
+    } else if (description == "") {
+      alert("Preencha a descrição")
+    }  else {
+      alert("Preencha todos os campos")
+    }
+   
   }
 
 
@@ -76,57 +83,45 @@ function CriarCard() {
 
   return (
     <>
-      <SimpleGrid
-        columns={{ sm: 1, lg: 2 }}
-        spacing={10}
-        minH={'calc(100vh - 70px)'}
-        p={'2rem'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        my={'1rem'}
-      >
-        <Flex
+     <Flex
+     w={'100%'}
+     minH={'100vh'}
+     px={'2rem'}
+     py={'10rem'}
+     >
+     <Flex
           flexDirection={'column'}
           boxShadow={'0 0 10px 0 rgba(0,0,0,.5)'}
           borderRadius={'10px'}
           p={'2rem'}
-          minH={'30vh'}
-        >
-
-          <Box>
-            <Text>
-              Title:
-            </Text>
-            <Text>
-              {title}
-            </Text>
-          </Box>
-          <Box mt={'.5rem'}>
-            <Text>
-              Descrição:
-            </Text>
-            <Text>
-              {description}
-            </Text>
-          </Box>
-        </Flex>
-        <Flex
-          flexDirection={'column'}
-          boxShadow={'0 0 10px 0 rgba(0,0,0,.5)'}
-          borderRadius={'10px'}
-          p={'2rem'}
-          minH={'30vh'}
+          w={'100%'}
+          minH={'calc(100vh - 20rem)'}
+          maxW={'900px'}
+          mx={'auto'}
         >
           <form onSubmit={handlerSubmitCreateCard}>
           <Box>
-            <FormLabel htmlFor="lb-img"  border={'2px dashed #000'} cursor={'pointer'} borderRadius={'10px'} p={'1rem'}>
+            <FormLabel 
+            htmlFor="lb-img"  
+            border={'2px dashed #000'} 
+            cursor={'pointer'} 
+            borderRadius={'10px'} 
+            p={'1rem'}
+            textAlign={'center'}
+            fontWeight={'bold'}
+            >
               Insira sua Imagem
-            <Input type={'file'} id="lb-img" display={'none'}/>
+            <Input 
+            type={'file'} 
+            id="lb-img" 
+            display={'none'} 
+            onChange={(e)=>{setImg(e.target.value)}}
+            />
             </FormLabel>
           </Box>
-          <Box mb={'1rem'}>
-            <Text>Progresso de dowload {progress} % </Text>
-          </Box>
+          <Box my={'1rem'} textAlign={'center'}>
+                 <Text>Progresso de dowload {progress} % </Text>
+            </Box>
             <Box>
               <FormLabel htmlFor='title'>
                 Titulo
@@ -141,13 +136,12 @@ function CriarCard() {
               <Input id="descption" onChange={(e) => { setDescription(e.target.value) }} maxLength={400} />
             </Box>
 
-            <Button type="submit">
+            <Button type="submit" w={'100%'}>
               Enviar
             </Button>
           </form>
         </Flex>
-
-      </SimpleGrid>
+     </Flex>
     </>
   )
 }

@@ -14,7 +14,8 @@ import {
     Box,
     FormLabel,
     Input,
-    Text
+    Text,
+    Image
 } from '@chakra-ui/react'
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { AiFillEdit } from "react-icons/ai"
@@ -41,7 +42,7 @@ function TypeTable() {
     const [ocultDataTitle, setOcultDataTitle] = useState(false);
 
     const [ocultDataDescription, setOcultDataDescription] = useState(false);
-   
+
     const [progress, setProgress] = useState(0);
 
     const nullTitle = useRef();
@@ -81,15 +82,16 @@ function TypeTable() {
         <>
             <TableContainer
                 w={'100%'}
-                mt={'1rem'}
+                my={'2rem'}
             >
                 <Table >
                     <Thead>
                         <Tr>
-                            <Th>Title</Th>
-                            <Th>Description</Th>
-                            <Th>Edit</Th>
-                            <Th>Delite</Th>
+                            <Th>Imagem</Th>
+                            <Th>Titulo</Th>
+                            <Th>Descrição</Th>
+                            <Th>Editar</Th>
+                            <Th>Excluir</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -98,12 +100,34 @@ function TypeTable() {
                                 return (
                                     <>
                                         <Tr>
-                                            <Td>{d.Title}</Td>
-                                            <Td >{d.Description}</Td>
-                                            <Td>
+                                            <Td
+                                                w={'20%'}
+                                            >
+                                                <Image
+                                                    src={d.Img}
+                                                    alt='Dan Abramov'
+                                                    w={'100%'}
+                                                    h={'150px'}
+                                                    style={{ borderRadius: '10px' }}
+                                                    cursor={'pointer'}
+                                                    transition={'.3s ease-in-out'}
+                                                    _hover={{
+                                                        transform: 'scale(1.05)'
+                                                    }}
+                                                />
+                                            </Td>
+                                            <Td
+                                                w={'20%'}
+                                            >{d.Title}</Td>
+                                            <Td
+                                                w={'20%'}
+                                            >{d.Description}</Td>
+                                            <Td
+                                                w={'20%'}
+                                            >
                                                 <Flex
-                                                    w={'30px'}
-                                                    h={'30px'}
+                                                    w={'40px'}
+                                                    h={'40px'}
                                                     borderRadius={'50%'}
                                                     justify={'center'}
                                                     align={'center'}
@@ -118,10 +142,12 @@ function TypeTable() {
                                                 </Flex>
                                             </Td>
 
-                                            <Td>
+                                            <Td
+                                                w={'20%'}
+                                            >
                                                 <Flex
-                                                    w={'30px'}
-                                                    h={'30px'}
+                                                    w={'40px'}
+                                                    h={'40px'}
                                                     borderRadius={'50%'}
                                                     cursor={'pointer'}
                                                     justify={'center'}
@@ -169,17 +195,18 @@ function TypeTable() {
             <Flex
                 display={btbDeliteShow ? 'block' : 'none'}
                 w={'100%'}
-                minH={'100vh'}
                 backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
                 left={'0'}
+                bottom={'0'}
                 px={'1rem'}
-                py={'5rem'}
+                py={'15rem'}
+                zIndex={'1000'}
             >
                 <Flex
                     w={'100%'}
-                    minH={'calc(50vh - 5rem)'}
+                    minH={'calc(100vh - 30rem)'}
                     maxW={'900px'}
                     mx={'auto'}
                     bg={'#fff'}
@@ -216,15 +243,16 @@ function TypeTable() {
                 backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
+                bottom={'0'}
                 left={'0'}
                 display={btbUpdateShow ? 'block' : 'none'}
                 px={'1rem'}
-                py={'5rem'}
+                py={'10rem'}
                 zIndex={'1000'}
             >
                 <Flex
                     w={'100%'}
-                    minH={'calc(70vh - 5rem)'}
+                    minH={'calc(100vh - 20rem)'}
                     maxW={'900px'}
                     mx={'auto'}
                     bg={'#fff'}
@@ -253,12 +281,19 @@ function TypeTable() {
                                             </Box>
 
                                             <Box>
-                                                <FormLabel htmlFor="lb-img" border={'2px dashed #000'} cursor={'pointer'} borderRadius={'10px'} p={'1rem'}>
+                                                <FormLabel htmlFor="lb-img" 
+                                                border={'2px dashed #000'} 
+                                                cursor={'pointer'} 
+                                                borderRadius={'10px'} 
+                                                p={'1rem'}
+                                                textAlign={'center'}
+                                                fontWeight={'bold'}
+                                                >
                                                     Insira sua Imagem
                                                     <Input type={'file'} id="lb-img" display={'none'} />
                                                 </FormLabel>
                                             </Box>
-                                            <Box mb={'1rem'}>
+                                            <Box my={'1rem'} textAlign={'center'}>
                                                 <Text>Progresso de dowload {progress} % </Text>
                                             </Box>
 
@@ -268,7 +303,7 @@ function TypeTable() {
                                                 </FormLabel>
                                                 <Input id="title"
                                                     ref={nullTitle}
-                                                    onChange={(e) => { setTitle(e.target.value) }} 
+                                                    onChange={(e) => { setTitle(e.target.value) }}
                                                     onClick={handlerOcultDataTitle}
                                                     value={ocultDataTitle ? null : d.Title} />
                                             </Box>
@@ -279,8 +314,8 @@ function TypeTable() {
                                                 </FormLabel>
                                                 <Input id="description"
                                                     ref={nullDescription}
-                                                    onChange={(e) => { setDescription(e.target.value) }} 
-                                                    onClick={handlerOcultDataDescription} 
+                                                    onChange={(e) => { setDescription(e.target.value) }}
+                                                    onClick={handlerOcultDataDescription}
                                                     value={ocultDataDescription ? null : d.Description} />
                                             </Box>
                                         </>

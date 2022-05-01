@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { db, storage } from '../../../../../config/fireBaseConnecting'
 import { collection, getDocs } from 'firebase/firestore'
-import { Flex, SimpleGrid, Box, Text, Button, FormLabel, Input } from '@chakra-ui/react'
+import { Flex, SimpleGrid, Box, Text, Button, FormLabel, Input,Image } from '@chakra-ui/react'
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { AiFillEdit } from "react-icons/ai"
 import { handlerUpdateCard } from '../../../../utils/Database/Querys/UpdateCard/db'
@@ -64,6 +64,7 @@ function TypeCard() {
                 w={'100%'}
                 columns={{ sm: 1, lg: 3, xl: '4' }}
                 spacing={10}
+                my={'2rem'}
             >
                 {
                     dado.map((d) => {
@@ -76,6 +77,11 @@ function TypeCard() {
                                     borderRadius={'10px'}
                                     p={'2rem'}
                                     position={'relative'}
+                                    transition={' .5s ease-in-out'}
+                                    _hover={{
+                                        transform: 'scale(1.02)',
+                                        cursor: 'pointer'
+                                    }}
                                 >
                                     <Flex
                                         position={'absolute'}
@@ -88,6 +94,7 @@ function TypeCard() {
                                             borderRadius={'50%'}
                                             justify={'center'}
                                             align={'center'}
+                                            mr={'1rem'}
                                             transition={'1s ease-in-out'}
                                             cursor={'pointer'}
                                             onClick={() => { idCardUpdate(d.id); handlerUpdateShow(); }}
@@ -115,6 +122,23 @@ function TypeCard() {
                                         </Flex>
                                     </Flex>
 
+                                    <Box 
+                                    w={'100%'}
+                                    my={'2rem'}
+                                    >
+                                        <Image 
+                                        src={d.Img} 
+                                        alt='Dan Abramov' 
+                                        w={'100%'} 
+                                        h={'150px'} 
+                                        style={{borderRadius:'10px'}} 
+                                        cursor={'pointer'}
+                                        transition={'.3s ease-in-out'}
+                                        _hover={{
+                                            transform: 'scale(1.05)'
+                                        }}
+                                        />
+                                    </Box>
                                     <Box
                                     >
                                         <Text>
@@ -169,18 +193,18 @@ function TypeCard() {
             <Flex
                 display={btbDeliteShow ? 'block' : 'none'}
                 w={'100%'}
-                minH={'100vh'}
                 backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
                 left={'0'}
+                bottom={'0'}
                 px={'1rem'}
-                py={'5rem'}
+                py={'15rem'}
                 zIndex={'1000'}
             >
                 <Flex
                     w={'100%'}
-                    minH={'calc(50vh - 5rem)'}
+                    minH={'calc(100vh - 30rem)'}
                     maxW={'900px'}
                     mx={'auto'}
                     bg={'#fff'}
@@ -217,15 +241,16 @@ function TypeCard() {
                 backgroundColor={'rgba(0,0,0,.5)'}
                 position={'absolute'}
                 top={'0'}
+                bottom={'0'}
                 left={'0'}
                 display={btbUpdateShow ? 'block' : 'none'}
                 px={'1rem'}
-                py={'5rem'}
+                py={'10rem'}
                 zIndex={'1000'}
             >
                 <Flex
                     w={'100%'}
-                    minH={'calc(70vh - 5rem)'}
+                    minH={'calc(100vh - 20rem)'}
                     maxW={'900px'}
                     mx={'auto'}
                     bg={'#fff'}
@@ -254,12 +279,20 @@ function TypeCard() {
                                             </Box>
 
                                             <Box>
-                                                <FormLabel htmlFor="lb-img" border={'2px dashed #000'} cursor={'pointer'} borderRadius={'10px'} p={'1rem'}>
+                                                <FormLabel 
+                                                htmlFor="lb-img" 
+                                                border={'2px dashed #000'} 
+                                                cursor={'pointer'} 
+                                                borderRadius={'10px'} 
+                                                p={'1rem'}
+                                                textAlign={'center'}
+                                                fontWeight={'bold'}
+                                                >
                                                     Insira sua Imagem
                                                     <Input type={'file'} id="lb-img" display={'none'} />
                                                 </FormLabel>
                                             </Box>
-                                            <Box mb={'1rem'}>
+                                            <Box my={'1rem'} textAlign={'center'}>
                                                 <Text>Progresso de dowload {progress} % </Text>
                                             </Box>
                                             <Box >

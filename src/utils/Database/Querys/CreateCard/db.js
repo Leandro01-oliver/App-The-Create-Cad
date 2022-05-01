@@ -4,14 +4,18 @@ import { collection, addDoc } from "firebase/firestore";
 
 const colectionRef = collection(db, "cards");
 
-const handlerCreateCard = async (title, description) => {
+const handlerCreateCard = async (img, title, description) => {
     if (addDoc) {
-        if (title != null && description != null) {
+        if (img != "" && title != null && description != null) {
             await addDoc(colectionRef, {
+                Img: img,
                 Title: title,
                 Description: description,
             })
-            alert("Criado com sucesso o card");
+            alert("Sucesso na criação do card");
+            setTimeout(()=>{
+                window.location = "/Dropdow-Rota/MeusCards";
+            },3000)
             location.reload;
         } else if (title != null) {
             alert("Preencha o campo de title");

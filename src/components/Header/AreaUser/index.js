@@ -65,7 +65,9 @@ function AvatarUser() {
    display={showMenu ? 'block' : 'none'}
    mb={{sm:'1rem', lg:'0'}}
   >
-              <Flex justify={'center'}><Text display={user? 'flex' : 'none' } > {userName}</Text></Flex>
+              <Flex justify={'center'}>
+                    <Text display={user? 'flex' : 'none' } fontWeight={'bold'}>{userName}</Text>
+              </Flex>
               <Box my={'.5rem'} display={user ? 'flex' : 'none'} bg={'blue'} w={'100%'} h={'2px'}>
               </Box>
         <Button

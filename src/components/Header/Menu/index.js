@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button, Box } from '@chakra-ui/react'
+import {AiFillHome} from "react-icons/ai";
 import Link from 'next/link'
 
 function Menu() {
-
-
-    useEffect(() => {
-
-    }, []);
 
     const navMenu = [
         {
@@ -35,8 +31,7 @@ function Menu() {
                                         mx={{sm:'0',lg:'1rem'}}
                                         className={'btn-menu'}
                                     >
-                                        {item.name}
-                                        <i></i>
+                                       <AiFillHome style={{marginRight:'.5rem'}}/> {item.name}
                                     </Button>
                                 </Link>
                                 <Box display={{ sm: 'block', md: 'none' }}>

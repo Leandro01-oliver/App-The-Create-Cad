@@ -1,29 +1,39 @@
 import React, { useRef } from 'react'
-import { GrTable } from 'react-icons/gr'
+import { GrTable, GrView } from 'react-icons/gr'
 import { BiCreditCardFront} from 'react-icons/bi'
 import { Flex, Box } from '@chakra-ui/react'
-import TypeTable from '../../components/TypeTable'
-import TypeCard from '../../components/TypeCard'
+import TypeTable from '../../components/MyCard/NavTypeCard/TypeTable'
+import TypeCard from '../../components/MyCard/NavTypeCard/TypeCard'
+import ViewCard from '../../components/MyCard/ViewCard'
+
 
 function MeusCards() {
 
   const table = useRef();
   const card = useRef();
+  const viewCard = useRef();
+
+  const handlerMenuViewCard = () => {
+    table.current.style.display = 'none'
+    card.current.style.display = 'none'
+    viewCard.current.style.display = 'flex'
+  }
 
   const handlerMenuCard = () => {
     table.current.style.display = 'none'
     card.current.style.display = 'flex'
+    viewCard.current.style.display = 'none'
   }
 
   const handlerMenuTable = () => {
     table.current.style.display = 'flex'
     card.current.style.display = 'none'
+    viewCard.current.style.display = 'none'
   }
   return (
     <>
       <Flex
-        w={'100%'}
-        minH={'calc(100vh - 70px)'}
+        w={'100%'}  
         direction={'column'}
         p={'2rem'}
       >
@@ -31,7 +41,6 @@ function MeusCards() {
           boxShadow={'0 0 10px 0 rgba(0,0,0,.5)'}
           borderRadius={'10px'}
           p={'1rem'}
-          pb={'2.5rem'}
           align={'center'}
           justify={'center'}
           position={'relative'}
@@ -40,11 +49,25 @@ function MeusCards() {
 
 
           <Flex>
+          <Flex
+              w={'30px'}
+              h={'30px'}
+              borderRadius={'50%'}
+              border={'2px solid #000'}
+              justify={'center'}
+              align={'center'}
+              cursor={'pointer'}
+              title={'Visualizar em formato de card'}
+              onClick={handlerMenuViewCard}
+            >
+              <GrView />
+            </Flex>
             <Flex
               w={'30px'}
               h={'30px'}
               borderRadius={'50%'}
               border={'2px solid #000'}
+              mx={'1rem'}
               justify={'center'}
               align={'center'}
               cursor={'pointer'}
@@ -55,7 +78,7 @@ function MeusCards() {
             </Flex>
             <Flex
               w={'30px'}
-              h={'30px'} ml={'1rem'}
+              h={'30px'} 
               borderRadius={'50%'}
               border={'2px solid #000'}
               justify={'center'}
@@ -86,6 +109,12 @@ function MeusCards() {
           display={'none'}
         >
           <TypeCard />
+        </Flex>
+        <Flex
+           ref={viewCard}
+           w={'100%'}
+        >
+          <ViewCard/>
         </Flex>
       </Flex>
     </>

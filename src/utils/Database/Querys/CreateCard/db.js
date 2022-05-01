@@ -13,9 +13,9 @@ const handlerCreateCard = async (img, title, description) => {
                 Description: description,
             })
             alert("Sucesso na criação do card");
-            setTimeout(()=>{
+            setTimeout(() => {
                 window.location = "/Dropdow-Rota/MeusCards";
-            },3000)
+            }, 3000)
             location.reload;
         } else if (title != null) {
             alert("Preencha o campo de title");
@@ -24,7 +24,7 @@ const handlerCreateCard = async (img, title, description) => {
         } else {
             alert("preencha todos os dois campos ")
         }
-    }else{
+    } else {
         console.log("Não foi possível criar card")
     }
 }

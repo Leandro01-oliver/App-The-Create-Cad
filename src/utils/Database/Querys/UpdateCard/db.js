@@ -5,42 +5,42 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const handlerUpdateCard = async (id, img, setProgress, title, description) => {
 
-    const storageRef = ref(storage, `/files/${img.name}`);
+  const storageRef = ref(storage, `/files/${img.name}`);
 
-    const uploadTask =  uploadBytesResumable(storageRef, img);
+  const uploadTask = uploadBytesResumable(storageRef, img);
 
 
-    uploadTask.on('state_changed',
-      (snapshot) => {
+  uploadTask.on('state_changed',
+    (snapshot) => {
 
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
 
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
+      setProgress(progress);
+    },
+    (error) => {
+      console.log(error);
+    },
+    () => {
 
-        getDownloadURL(uploadTask.snapshot.ref)
-          .then(async(url)=>{
-                const refCollection = doc(db, 'cards', id);
-                if(updateDoc){
-                await updateDoc(refCollection,{
-                Img: url,
-                Title: title,
-                Description: description
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then(async (url) => {
+          const refCollection = doc(db, 'cards', id);
+          if (updateDoc) {
+            await updateDoc(refCollection, {
+              Img: url,
+              Title: title,
+              Description: description
             })
             alert("Sucesso na atualização do card");
-            setTimeout(()=>{
-                window.location = "/Dropdow-Rota/MeusCards";
-            },3000)
-        }
-          });
-      }
-    );
+            setTimeout(() => {
+              window.location = "/Dropdow-Rota/MeusCards";
+            }, 3000)
+          }
+        });
+    }
+  );
 
 }
 

@@ -5,7 +5,7 @@ import React,{ useEffect, useState } from "react";
 
   return (
     <>
-      <h1>Home</h1>
+     
     </>
   )
 }
